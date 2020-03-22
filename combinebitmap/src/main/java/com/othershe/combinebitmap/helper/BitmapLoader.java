@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.os.Handler;
 import android.util.Log;
 
-import com.jakewharton.disklrucache.DiskLruCache;
+import com.othershe.combinebitmap.cache.DiskLruCache;
 import com.othershe.combinebitmap.cache.DiskLruCacheHelper;
 import com.othershe.combinebitmap.cache.LruCacheHelper;
 

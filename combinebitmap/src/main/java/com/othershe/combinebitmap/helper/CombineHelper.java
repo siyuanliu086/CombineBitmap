@@ -75,7 +75,7 @@ public class CombineHelper {
     }
 
     private void setBitmap(final Builder b, Bitmap[] bitmaps) {
-        Bitmap result = b.layoutManager.combineBitmap(b.size, b.subSize, b.gap, b.gapColor, bitmaps);
+        Bitmap result = b.layoutManager.combineBitmap(b.size, b.subSize, b.heightWidthScale, b.gap, b.gapColor, bitmaps);
 
         // 返回最终的组合Bitmap
         if (b.progressListener != null) {

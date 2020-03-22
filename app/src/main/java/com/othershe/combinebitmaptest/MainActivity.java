@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setLayoutManager(new WechatLayoutManager())
                 .setSize(180)
                 .setGap(3)
+//                .set
                 .setGapColor(Color.parseColor("#E8E8E8"))
                 .setUrls(getUrls(count))
                 .setImageView(imageView)

@@ -29,6 +29,7 @@ public class Builder {
     public int placeholder  = R.drawable.defalut_placeholder; // 获取图片失败时的默认图片
     public int count; // 要加载的资源数量
     public int subSize; // 单个bitmap的尺寸
+    public float heightWidthScale = 1.0f; // height = w * heightWidthScale
 
     public ILayoutManager layoutManager; // bitmap的组合样式
 
@@ -108,6 +109,14 @@ public class Builder {
         subSize = getSubSize(size, gap, layoutManager, count);
         initRegions();
         CombineHelper.init().load(this);
+    }
+
+    public Builder setHeightWidthScale(float scale) {
+        if(scale == 0) {
+            scale = 1;
+        }
+        this.heightWidthScale = scale;
+        return this;
     }
 
     /**

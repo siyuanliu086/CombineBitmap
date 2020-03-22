@@ -5,8 +5,6 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 
-import com.jakewharton.disklrucache.DiskLruCache;
-
 import java.io.File;
 import java.io.IOException;
 
