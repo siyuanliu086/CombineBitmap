@@ -27,7 +27,7 @@ public class DingLayoutManager implements ILayoutManager {
             if (count == 2 || (count == 3 && i == 0)) {
                 subBitmap = Bitmap.createBitmap(subBitmap, (size + gap) / 4, 0, (size - gap) / 2, (int) (size * heightWidthScale));
             } else if ((count == 3 && (i == 1 || i == 2)) || count == 4) {
-                subBitmap = Bitmap.createBitmap(subBitmap, (size + gap) / 4, (size + gap) / 4, (size - gap) / 2, (size - gap) / 2);
+                subBitmap = Bitmap.createBitmap(subBitmap, (size + gap) / 4, ((int) (size * heightWidthScale) + gap) / 4, (size - gap) / 2, ((int) (size * heightWidthScale) - gap) / 2);
             }
 
             int dx = dxy[i][0];

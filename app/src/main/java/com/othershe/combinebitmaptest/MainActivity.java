@@ -36,9 +36,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             "http://img.hb.aicdn.com/73f2fbeb01cd3fcb2b4dccbbb7973aa1a82c420b21079-5yj6fx_fw658",
     };
 
-    NiceImageView imageView1;
-    NiceImageView imageView2;
-    NiceImageView imageView3;
+    ImageView imageView1;
+    ImageView imageView2;
+    ImageView imageView3;
     ImageView imageView4;
     ImageView imageView5;
     ImageView imageView6;
@@ -167,6 +167,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setLayoutManager(new DingLayoutManager())
                 .setSize(180)
                 .setGap(2)
+                .setHeightWidthScale(4/3)
                 .setUrls(getUrls(count))
                 .setOnProgressListener(new OnProgressListener() {
                     @Override
