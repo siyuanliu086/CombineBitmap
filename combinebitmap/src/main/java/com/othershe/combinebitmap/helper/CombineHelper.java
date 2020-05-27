@@ -1,8 +1,13 @@
 package com.othershe.combinebitmap.helper;
 
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.othershe.combinebitmap.listener.OnHandlerListener;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class CombineHelper {
@@ -43,6 +48,40 @@ public class CombineHelper {
     }
 
     /**
+     * 通过filePaths加载
+     *
+     * @param builder
+     */
+    private void loadByFilePaths(final Builder builder) {
+        int subSize = builder.subSize;
+        Bitmap[] compressedBitmaps = new Bitmap[builder.count];
+        for (int i = 0; i < builder.count; i++) {
+            compressedBitmaps[i] = CompressHelper.getInstance().compressResource(getLocalBitmap(builder.filePaths[i]), subSize, subSize);
+        }
+        setBitmap(builder, compressedBitmaps);
+    }
+
+    /**
+     * 加载本地图片
+     * @param url
+     * @return
+     */
+    private Bitmap getLocalBitmap(String filePath) {
+        Bitmap bitmap = null;
+        try {
+            FileInputStream fis = new FileInputStream(filePath);
+            bitmap = BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+            fis.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+    /**
      * 通过图片的资源id、bitmap加载
      *
      * @param builder
@@ -69,22 +108,28 @@ public class CombineHelper {
 
         if (builder.urls != null) {
             loadByUrls(builder);
-        } else {
+        } else if(builder.filePaths != null){
+            loadByFilePaths(builder);
+        } else if(builder.bitmaps != null){
             loadByResBitmaps(builder);
         }
     }
 
     private void setBitmap(final Builder b, Bitmap[] bitmaps) {
-        Bitmap result = b.layoutManager.combineBitmap(b.size, b.subSize, b.heightWidthScale, b.gap, b.gapColor, bitmaps);
+        try {
+            Bitmap result = b.layoutManager.combineBitmap(b.size, b.subSize, b.heightWidthScale, b.gap, b.gapColor, bitmaps);
 
-        // 返回最终的组合Bitmap
-        if (b.progressListener != null) {
-            b.progressListener.onComplete(result);
-        }
+            // 返回最终的组合Bitmap
+            if (b.progressListener != null) {
+                b.progressListener.onComplete(result);
+            }
 
-        // 给ImageView设置最终的组合Bitmap
-        if (b.imageView != null) {
-            b.imageView.setImageBitmap(result);
+            // 给ImageView设置最终的组合Bitmap
+            if (b.imageView != null) {
+                b.imageView.setImageBitmap(result);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

@@ -40,14 +40,16 @@ public class CompressHelper {
     }
 
     public Bitmap compressResource(Bitmap bitmap, int reqWidth, int reqHeight) {
-
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        float scaleWidth = ((float) reqWidth) / width;
-        float scaleHeight = ((float) reqHeight) / height;
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth, scaleHeight);
-        return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        if(bitmap != null) {
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            float scaleWidth = ((float) reqWidth) / width;
+            float scaleHeight = ((float) reqHeight) / height;
+            Matrix matrix = new Matrix();
+            matrix.postScale(scaleWidth, scaleHeight);
+            return Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+        }
+        return null;
     }
 
     private int calculateInSampleSize(BitmapFactory.Options options,

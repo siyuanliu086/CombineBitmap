@@ -41,6 +41,7 @@ public class Builder {
     public Bitmap[] bitmaps;
     public int[] resourceIds;
     public String[] urls;
+    public String[] filePaths;
 
 
     public Builder(Context context) {
@@ -96,6 +97,12 @@ public class Builder {
     public Builder setUrls(String... urls) {
         this.urls = urls;
         this.count = urls.length;
+        return this;
+    }
+
+    public Builder setFilePaths(String... filePaths) {
+        this.filePaths = filePaths;
+        this.count = filePaths.length;
         return this;
     }
 

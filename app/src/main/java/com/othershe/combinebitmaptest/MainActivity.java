@@ -16,6 +16,7 @@ import com.othershe.combinebitmap.listener.OnProgressListener;
 import com.othershe.combinebitmap.listener.OnSubItemClickListener;
 import com.othershe.library.NiceImageView;
 
+import java.io.File;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -34,6 +35,14 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             "http://img.hb.aicdn.com/9925b5f679964d769c91ad407e46a4ae9d47be8155e9a-seH7yY_fw658",
             "http://img.hb.aicdn.com/e22ee5730f152c236c69e2242b9d9114852be2bd8629-EKEnFD_fw658",
             "http://img.hb.aicdn.com/73f2fbeb01cd3fcb2b4dccbbb7973aa1a82c420b21079-5yj6fx_fw658",
+    };
+
+    private String[] IMG_FILE_PATG_ARR = {
+            "/sdcard/DamonPS2/t012a9cf5811a54acfe.jpg",
+            "/sdcard/DamonPS2/a1f189d4a420ef1927317ebfacc2ae055ff9f212148fb-iEyFWS_fw658.jpg",
+            "/sdcard/DamonPS2/69b52afdca0ae780ee44c6f14a371eee68ece4ec8a8ce-4vaO0k_fw658.jpg",
+            "/sdcard/DamonPS2/9925b5f679964d769c91ad407e46a4ae9d47be8155e9a-seH7yY_fw658.jpg",
+            "/sdcard/DamonPS2/73f2fbeb01cd3fcb2b4dccbbb7973aa1a82c420b21079-5yj6fx_fw658.jgp"
     };
 
     ImageView imageView1;
@@ -63,6 +72,12 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         return urls;
     }
 
+    private String[] getFilePaths(int count) {
+        String[] paths = new String[count];
+        System.arraycopy(IMG_FILE_PATG_ARR, 0, paths, 0, count);
+        return paths;
+    }
+
     private Bitmap[] getBitmaps(int count) {
         Bitmap[] bitmaps = new Bitmap[count];
         for (int i = 0; i < count; i++) {
@@ -88,6 +103,13 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         imageView10 = findViewById(R.id.iv10);
         imageView11 = findViewById(R.id.iv11);
         requestStoragePermission();
+
+        for(String path : IMG_FILE_PATG_ARR) {
+            File file = new File(path);
+            if(file != null && file.exists()) {
+                Log.i("MainActivity", file.length() + "\t" + path);
+            }
+        }
     }
 
     @AfterPermissionGranted(1000)
@@ -108,13 +130,13 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
             loadWechatBitmap(imageView7, 5);
 
-            loadWechatBitmap(imageView8, 6);
-
-            loadWechatBitmap(imageView9, 7);
-
-            loadWechatBitmap(imageView10, 8);
-
-            loadWechatBitmap(imageView11, 9);
+//            loadWechatBitmap(imageView8, 6);
+//
+//            loadWechatBitmap(imageView9, 7);
+//
+//            loadWechatBitmap(imageView10, 8);
+//
+//            loadWechatBitmap(imageView11, 9);
 
         } else {
             EasyPermissions.requestPermissions(this, "need storage permission", 1000, perms);
@@ -149,9 +171,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setLayoutManager(new WechatLayoutManager())
                 .setSize(180)
                 .setGap(3)
-//                .set
                 .setGapColor(Color.parseColor("#E8E8E8"))
-                .setUrls(getUrls(count))
+//                .setUrls(getUrls(count))
+                .setFilePaths(getFilePaths(count))
                 .setImageView(imageView)
                 .setOnSubItemClickListener(new OnSubItemClickListener() {
                     @Override
@@ -168,7 +190,8 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setSize(180)
                 .setGap(2)
                 .setHeightWidthScale(4/3)
-                .setUrls(getUrls(count))
+//                .setUrls(getUrls(count))
+                .setFilePaths(getFilePaths(count))
                 .setOnProgressListener(new OnProgressListener() {
                     @Override
                     public void onStart() {
