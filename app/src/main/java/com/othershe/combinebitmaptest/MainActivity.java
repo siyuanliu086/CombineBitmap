@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
 
     private String[] IMG_FILE_PATG_ARR = {
             "/sdcard/DamonPS2/t012a9cf5811a54acfe.jpg",
-            "/sdcard/DamonPS2/a1f189d4a420ef1927317ebfacc2ae055ff9f212148fb-iEyFWS_fw658.jpg",
+            "/sdcard/DamonPS2/a1f189d4a420ef1927317ebfacc2ae055ff9f212148fb-iEyFWS_fw658.jpg1",
             "/sdcard/DamonPS2/69b52afdca0ae780ee44c6f14a371eee68ece4ec8a8ce-4vaO0k_fw658.jpg",
             "/sdcard/DamonPS2/9925b5f679964d769c91ad407e46a4ae9d47be8155e9a-seH7yY_fw658.jpg",
             "/sdcard/DamonPS2/73f2fbeb01cd3fcb2b4dccbbb7973aa1a82c420b21079-5yj6fx_fw658.jgp"
@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setSize(180)
                 .setGap(3)
                 .setGapColor(Color.parseColor("#E8E8E8"))
+                .setPlaceholder(R.drawable.cat)
 //                .setUrls(getUrls(count))
                 .setFilePaths(getFilePaths(count))
                 .setImageView(imageView)
@@ -190,18 +191,16 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 .setSize(180)
                 .setGap(2)
                 .setHeightWidthScale(4/3)
+                .setPlaceholder(R.drawable.cat)
 //                .setUrls(getUrls(count))
                 .setFilePaths(getFilePaths(count))
+                .setImageView(imageView)
                 .setOnProgressListener(new OnProgressListener() {
                     @Override
-                    public void onStart() {
-
-                    }
+                    public void onStart() {}
 
                     @Override
-                    public void onComplete(Bitmap bitmap) {
-                        imageView.setImageBitmap(bitmap);
-                    }
+                    public void onComplete(Bitmap bitmap) {}
                 })
                 .build();
     }

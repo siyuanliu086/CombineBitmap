@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 
 import com.othershe.combinebitmap.listener.OnHandlerListener;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -63,11 +64,14 @@ public class CombineHelper {
 
     /**
      * 加载本地图片
-     * @param url
+     * @param filePath
      * @return
      */
     private Bitmap getLocalBitmap(String filePath) {
         Bitmap bitmap = null;
+        if(!new File(filePath).exists()) {
+            return null;
+        }
         try {
             FileInputStream fis = new FileInputStream(filePath);
             bitmap = BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
@@ -117,7 +121,9 @@ public class CombineHelper {
 
     private void setBitmap(final Builder b, Bitmap[] bitmaps) {
         try {
-            Bitmap result = b.layoutManager.combineBitmap(b.size, b.subSize, b.heightWidthScale, b.gap, b.gapColor, bitmaps);
+            Bitmap placeHolderBitmap = CompressHelper.getInstance()
+                    .compressResource(b.context.getResources(), b.placeholder, b.subSize, b.subSize);
+            Bitmap result = b.layoutManager.combineBitmap(b.size, b.subSize, b.heightWidthScale, b.gap, b.gapColor, bitmaps, placeHolderBitmap);
 
             // 返回最终的组合Bitmap
             if (b.progressListener != null) {
