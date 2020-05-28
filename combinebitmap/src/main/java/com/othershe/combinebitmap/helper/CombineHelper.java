@@ -69,7 +69,8 @@ public class CombineHelper {
      */
     private Bitmap getLocalBitmap(String filePath) {
         Bitmap bitmap = null;
-        if(!new File(filePath).exists()) {
+        if(filePath == null || filePath.equals("")
+                || filePath.startsWith("NOPoster") || !new File(filePath).exists()) {
             return null;
         }
         try {
